@@ -17,23 +17,26 @@ import { User } from './entities/User';
 const main = async () => {
   const conn = await createConnection({
     type: 'postgres',
-    database: 'redditclone',
-    username: 'postgres',
+    database: 'lireddit',
+    username: 'Russ',
     password: 'postgres',
     logging: true,
-    synchronize: true,
+    synchronize: false,
     entities: [Post, User],
   });
 
+  // await Post.delete({});
+  console.log(conn);
+
   const app = express();
 
-  const RedisStore = connectRedis(session);
+  const RedisStore = connectRedis(session as any);
   const redis = new Redis();
   app.use(
     cors({
       origin: 'http://localhost:3000',
       credentials: true,
-    })
+    }) as any
   );
   app.use(
     session({
@@ -41,7 +44,7 @@ const main = async () => {
       store: new RedisStore({
         client: redis,
         disableTouch: true,
-      }),
+      }) as any,
       cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
         httpOnly: true,
