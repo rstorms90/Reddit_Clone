@@ -21,7 +21,7 @@ const main = async () => {
     username: 'Russ',
     password: 'postgres',
     logging: true,
-    synchronize: false,
+    synchronize: true,
     entities: [Post, User],
   });
 
