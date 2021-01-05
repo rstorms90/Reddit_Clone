@@ -7,13 +7,12 @@ import { InputField } from '../components/InputField';
 import { Layout } from '../components/Layout';
 import { useCreatePostMutation } from '../generated/graphql';
 import { createUrqlClient } from '../utils/createUrqlClient';
-import { useIsAuth } from '../utils/useisAuth';
+import { useIsAuth } from '../utils/useIsAuth';
 
 const CreatePost: React.FC<{}> = ({}) => {
   const router = useRouter();
   useIsAuth();
   const [, createPost] = useCreatePostMutation();
-
   return (
     <Layout variant="small">
       <Formik
@@ -23,13 +22,11 @@ const CreatePost: React.FC<{}> = ({}) => {
           if (!error) {
             router.push('/');
           }
-
-          router.push('/');
         }}
       >
         {({ isSubmitting }) => (
           <Form>
-            <InputField name="title" placeholder="title" label="title" />
+            <InputField name="title" placeholder="title" label="Title" />
             <Box mt={4}>
               <InputField
                 textarea
@@ -44,7 +41,7 @@ const CreatePost: React.FC<{}> = ({}) => {
               isLoading={isSubmitting}
               variantColor="teal"
             >
-              Create post
+              create post
             </Button>
           </Form>
         )}
