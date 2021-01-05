@@ -35,7 +35,7 @@ const main = async () => {
 
   const app = express();
 
-  const RedisStore = connectRedis(session as any);
+  const RedisStore = connectRedis(session);
   const redis = new Redis();
   app.use(
     cors({
@@ -49,7 +49,7 @@ const main = async () => {
       store: new RedisStore({
         client: redis,
         disableTouch: true,
-      }) as any,
+      }),
       cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
         httpOnly: true,
