@@ -18,4 +18,4 @@ Tech:
 - TypeORM
 - Redis
 - Docker
-- DigitalOcean
+- DigitalOcean & VPS
