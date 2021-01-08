@@ -19,3 +19,5 @@ Tech:
 - Redis
 - Docker
 - DigitalOcean & VPS
+
+Frontend on Vercel, backend on DigitalOcean & VPS. Dokku managing the entire app. Nginx sitting on front - proxying requests to NodeJS(GraphQL, TypeORM) server. PostgreSQL DB sitting in a Docker container with a Redis container right next to it for sessions.
