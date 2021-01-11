@@ -24,11 +24,12 @@ const main = async () => {
     type: 'postgres',
     logging: true,
     url: process.env.DATABASE_URL,
-    // synchronize: true, //only have true for prod
+    synchronize: true, //only have true for prod
     migrations: [path.join(__dirname, './migrations/*')],
     entities: [Post, User, Updoot],
   });
-  await conn.runMigrations();
+  console.log(conn);
+  // await conn.runMigrations();
 
   // await Post.delete({});
 
