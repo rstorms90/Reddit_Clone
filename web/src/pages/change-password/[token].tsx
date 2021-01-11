@@ -5,9 +5,14 @@ import { Formik, Form } from 'formik';
 import { toErrorMap } from '../../utils/toErrorMap';
 import { InputField } from '../../components/InputField';
 import { Box, Button, Link, Flex } from '@chakra-ui/core';
-import { useChangePasswordMutation } from '../../generated/graphql';
+import {
+  MeDocument,
+  MeQuery,
+  useChangePasswordMutation,
+} from '../../generated/graphql';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
+import { withApollo } from '../../utils/withApollo';
 
 const ChangePassword: NextPage<{ token: string }> = () => {
   const router = useRouter();
@@ -25,6 +30,15 @@ const ChangePassword: NextPage<{ token: string }> = () => {
                 typeof router.query.token === 'string'
                   ? router.query.token
                   : '',
+            },
+            update: (cache, { data }) => {
+              cache.writeQuery<MeQuery>({
+                query: MeDocument,
+                data: {
+                  __typename: 'Query',
+                  me: data?.changePassword.user,
+                },
+              });
             },
           });
           if (response.data?.changePassword.errors) {
@@ -72,4 +86,4 @@ const ChangePassword: NextPage<{ token: string }> = () => {
   );
 };
 
-export default ChangePassword;
+export default withApollo({ ssr: false })(ChangePassword);
