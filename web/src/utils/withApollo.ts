@@ -1,4 +1,4 @@
-import { withApollo as createWithApollo } from 'next-apollo';
+import { createWithApollo } from './createWithApollo';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { PaginatedPosts } from '../generated/graphql';
 import { NextPageContext } from 'next';
