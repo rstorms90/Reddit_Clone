@@ -83,10 +83,10 @@ export class PostResolver {
       await getConnection().transaction(async (tm) => {
         await tm.query(
           `
-    update updoot
-    set value = $1
-    where "postId" = $2 and "userId" = $3
-        `,
+          update updoot
+          set value = $1
+          where "postId" = $2 and "userId" = $3
+          `,
           [realValue, postId, userId]
         );
 
@@ -95,7 +95,7 @@ export class PostResolver {
           update post
           set points = points + $1
           where id = $2
-        `,
+          `,
           [2 * realValue, postId]
         );
       });
@@ -104,18 +104,18 @@ export class PostResolver {
       await getConnection().transaction(async (tm) => {
         await tm.query(
           `
-    insert into updoot ("userId", "postId", value)
-    values ($1, $2, $3)
-        `,
+          insert into updoot ("userId", "postId", value)
+          values ($1, $2, $3)
+          `,
           [userId, postId, realValue]
         );
 
         await tm.query(
           `
-    update post
-    set points = points + $1
-    where id = $2
-      `,
+          update post
+          set points = points + $1
+          where id = $2
+          `,
           [realValue, postId]
         );
       });
@@ -141,12 +141,12 @@ export class PostResolver {
 
     const posts = await getConnection().query(
       `
-    select p.*
-    from post p
-    ${cursor ? `where p."createdAt" < $2` : ''}
-    order by p."createdAt" DESC
-    limit $1
-    `,
+      select p.*
+      from post p
+      ${cursor ? `where p."createdAt" < $2` : ''}
+      order by p."createdAt" DESC
+      limit $1
+      `,
       replacements
     );
 
