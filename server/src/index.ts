@@ -22,11 +22,8 @@ import { createUpdootLoader } from './utils/createUpdootLoader';
 const main = async () => {
   const conn = await createConnection({
     type: 'postgres',
-    // database: 'lireddit',
-    // username: 'Russ',
-    // password: 'postgres',
-    url: process.env.DATABASE_URL,
     logging: true,
+    url: process.env.DATABASE_URL,
     // synchronize: true, //only have true for prod
     migrations: [path.join(__dirname, './migrations/*')],
     entities: [Post, User, Updoot],
@@ -58,7 +55,7 @@ const main = async () => {
         httpOnly: true,
         sameSite: 'lax', // csrf
         secure: __prod__, // cookie only works in https
-        domain: __prod__ ? '.customdomain.com' : undefined,
+        domain: __prod__ ? '.stormscoding.com' : undefined,
       },
       saveUninitialized: false,
       secret: process.env.SESSION_SECRET,

@@ -127,6 +127,7 @@ export class UserResolver {
       1000 * 60 * 60 * 24 * 3
     ); // 3 days
 
+    // TODO: Need to set up domain origin and real e-mail provider for production
     await sendEmail(
       email,
       `<a href="http://localhost:3000/change-password/${token}">reset password</a>`
@@ -173,7 +174,7 @@ export class UserResolver {
       user = result.raw[0];
     } catch (err) {
       //|| err.detail.includes("already exists")) {
-      // duplicate username error
+      // duplicate username error - psql unique validation
       if (err.code === '23505') {
         return {
           errors: [

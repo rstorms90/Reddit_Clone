@@ -1,8 +1,8 @@
 import DataLoader from 'dataloader';
 import { User } from '../entities/User';
 
-// [1, 78, 8, 9]
-// [{id: 1, username: 'tim'}, {}, {}, {}]
+// [1, 78, 8, 9] - pass in userIds
+// [{id: 1, username: 'tim'}, {}, {}, {}] - return the user object
 export const createUserLoader = () =>
   new DataLoader<number, User>(async (userIds) => {
     const users = await User.findByIds(userIds as number[]);
