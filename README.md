@@ -12,7 +12,7 @@ Tech:
 - TypeScript
 - GraphQL
 - TypeGraphQL
-- URQL/Apollo (Middle of switching)
+- URQL/Apollo (Apollo currently on this branch - URQL on master)
 - Node.js
 - PostgreSQL
 - TypeORM
